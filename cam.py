@@ -4,7 +4,7 @@ from sre_parse import FLAGS
 import cv2 
 import streamlit as st 
 
-cam_source = 0
+cam_source = -1
 on = st.button('On')
 off = st.button('Off')
 FLAG = False
