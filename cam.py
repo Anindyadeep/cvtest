@@ -7,27 +7,29 @@ import streamlit as st
 cam_source = 0
 on = st.button('On')
 off = st.button('Off')
-
-cap = cv2.VideoCapture(cam_source)
-app_window = st.image([])
-
-frame_width = int(cap.get(3))
-frame_height = int(cap.get(4))
 FLAG = False
 
-if on:   
+
+if on:
+    cap = cv2.VideoCapture(cam_source)
+    app_window = st.image([])
+
+    frame_width = int(cap.get(3))
+    frame_height = int(cap.get(4))
     FLAG = True 
     size = (frame_width, frame_height)
 
-    result = cv2.VideoWriter('pp.avi', 
+if on:   
+    result = cv2.VideoWriter('./pp.avi', 
                             cv2.VideoWriter_fourcc(*'MJPG'),
                             10, size)
 
     while on and not off:
         ret, frame = cap.read()
-        result.write(frame)
-        app_window.image(frame)
-        cv2.waitKey(30)
+        if ret:
+            result.write(frame)
+            app_window.image(frame)
+            cv2.waitKey(30)
 
         if off:
             break 
